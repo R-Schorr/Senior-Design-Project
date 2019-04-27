@@ -7,12 +7,6 @@ import atexit
 import termios
 import optparse
 import time
-import re
-import sys
-import select
-import atexit
-import termios
-import optparse
 import os
 
 from evdev import ecodes, list_devices, AbsInfo, InputDevice, categorize, events
@@ -39,7 +33,9 @@ GPIO_ML = 29  #B1_M
 GPIO_BM = 38  #A1_B && B2_B
 GPIO_BR = 40  #A2_B
 GPIO_BL = 36  #B1_B
- 
+
+#Set GPIO Pins to off
+
 GPIO.setup(GPIO_FM, GPIO.OUT, initial = 0) 
 GPIO.setup(GPIO_FR, GPIO.OUT, initial = 0)
 GPIO.setup(GPIO_FL, GPIO.OUT, initial = 0)
@@ -122,6 +118,19 @@ if __name__ == '__main__':
              if event.code==307 and event.value ==1:
 
                 running=False
+		
+		GPIO.output(GPIO_FM, GPIO.LOW) 
+		GPIO.output(GPIO_FR, GPIO.LOW)
+		GPIO.output(GPIO_FL, GPIO.LOW)
+
+		GPIO.output(GPIO_MM, GPIO.LOW)
+		GPIO.output(GPIO_MR, GPIO.LOW)
+		GPIO.output(GPIO_ML, GPIO.LOW)
+
+		GPIO.output(GPIO_BM, GPIO.LOW)
+		GPIO.output(GPIO_BR, GPIO.LOW)
+		GPIO.output(GPIO_BL, GPIO.LOW)
+		
                 break
 
 
