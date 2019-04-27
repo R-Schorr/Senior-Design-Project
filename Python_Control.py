@@ -264,17 +264,17 @@ if __name__ == '__main__':
 
 	     if mag_right >= 24000:
         
-                if angle_right >= 350 or angle_right <= 10: # RIGHT
-            
+                #if angle_right >= 350 or angle_right <= 10: # RIGHT
+                  #DO NOTHING
 
-                elif angle_right >= 80 and angle_right <= 100: # FORWARD
+                if angle_right >= 80 and angle_right <= 100: # FORWARD
 
                   GPIO.output(GPIO_BM, HIGH)
                   GPIO.output(GPIO_MM, HIGH)
                   GPIO.output(GPIO_FM, HIGH)
                         
-                elif angle_right >= 170 and angle_right <= 190: #LEFT
-          
+                #elif angle_right >= 170 and angle_right <= 190: #LEFT
+                   # DO NOTHING
 
                 elif angle_right >= 260 and angle_right <= 280: # BACK
             
