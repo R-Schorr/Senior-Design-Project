@@ -1,7 +1,8 @@
 # Senior-Design-Project
 Code of Demonstrator 
-Python Code for Senior Design Project 
-Aerospace Engineering Class 462 
+Python Code for Senior Design Project
+Iowa State University
+Aerospace Engineering 462 
 
 The purpose of this code is to control our demonstrator with an Xbox One controller using Evdev on a raspberry pi zero
 we remapped the coordinates of the Xbox controller to what believe is the exact center (or at least close enough) 
