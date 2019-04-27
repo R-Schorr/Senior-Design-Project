@@ -22,22 +22,35 @@ from evdev import ecodes, list_devices, AbsInfo, InputDevice, categorize, events
 
 
 # DEFINITIONS:
-gamepad=InputDevice('/dev/input/event0')
+gamepad=InputDevice('/dev/input/event3')
 
 running = True
+
+GPIO.setmode(GPIO.BOARD)
  
-GPIO_FM = 13
-GPIO_FR = 15
-GPIO_FL = 11
+GPIO_FM = 13  #A1_F && B2_F
+GPIO_FR = 15  #A2_F
+GPIO_FL = 11  #B1_F
  
-GPIO_MM = 31
-GPIO_MR = 33
-GPIO_ML = 29
+GPIO_MM = 31  #A1_M && B2_M
+GPIO_MR = 33  #A2_M
+GPIO_ML = 29  #B1_M
  
-GPIO_BM = 38
-GPIO_BR = 40
-GPIO_BL = 36
+GPIO_BM = 38  #A1_B && B2_B
+GPIO_BR = 40  #A2_B
+GPIO_BL = 36  #B1_B
  
+GPIO.setup(GPIO_FM, GPIO.OUT, initial = 0) 
+GPIO.setup(GPIO_FR, GPIO.OUT, initial = 0)
+GPIO.setup(GPIO_FL, GPIO.OUT, initial = 0)
+
+GPIO.setup(GPIO_MM, GPIO.OUT, initial = 0)
+GPIO.setup(GPIO_MR, GPIO.OUT, initial = 0)
+GPIO.setup(GPIO_ML, GPIO.OUT, initial = 0)
+
+GPIO.setup(GPIO_BM, GPIO.OUT, initial = 0)
+GPIO.setup(GPIO_BR, GPIO.OUT, initial = 0)
+GPIO.setup(GPIO_BL, GPIO.OUT, initial = 0)
 
 #######################################################################################################################################################
 
@@ -82,8 +95,10 @@ if __name__ == '__main__':
     print(gamepad)
     running == True
         #print ds
-    x=0
-    y=0
+    x_left=0
+    y_left=0
+    x_right=0
+    y_right=0
 
 
     # WHILE RUNNING:
@@ -133,70 +148,71 @@ if __name__ == '__main__':
 # Joystick right = yaw right (positive z moment) = fire attitude thruster into positive y axis (A2_M)
 # Joystick left = yaw left (negative z moment) = fire attitude thruster into negative y axis (B1_M)
 
+             if mag_left >= 24000:
         
-             if angle_left == 0 or angle_left == 360:
+                if angle_left == 0 or angle_left == 360:
             
-                GPIO.output(GPIO_ML, GPIO.HIGH)
+                   GPIO.output(GPIO_ML, GPIO.HIGH)
 
-             elif angle_left != 0 or angle_left != 360:
+                elif angle_left != 0 or angle_left != 360:
 
-               GPIO.output(GPIO_ML, GPIO.LOW)
+                  GPIO.output(GPIO_ML, GPIO.LOW)
             
-             if angle_left == 90:
-            
-               GPIO.output(GPIO_ML, GPIO.HIGH)
-
-             elif angle_left != 90:
-
-               GPIO.output(GPIO_ML, GPIO.LOW)               
-            
-             if angle_left == 180:
-            
-               GPIO.output(GPIO_ML, GPIO.HIGH)
-
-	     elif angle_left != 180:
-
-                GPIO.output(GPIO_ML, GPIO.LOW)
-            
-             if angle_left == 270:
+                if angle_left == 90:
             
                   GPIO.output(GPIO_ML, GPIO.HIGH)
 
-      	     elif angle_left != 270:
+                elif angle_left != 90:
+
+                  GPIO.output(GPIO_ML, GPIO.LOW)               
+            
+                if angle_left == 180:
+            
+                  GPIO.output(GPIO_ML, GPIO.HIGH)
+
+                elif angle_left != 180:
 
                    GPIO.output(GPIO_ML, GPIO.LOW)
             
-             if angle_left > 0 and angle_left < 90:
+                if angle_left == 270:
+            
+                     GPIO.output(GPIO_ML, GPIO.HIGH)
+
+                elif angle_left != 270:
+
+                   GPIO.output(GPIO_ML, GPIO.LOW)
+            
+                if angle_left > 0 and angle_left < 90:
             
                   GPIO.output(GPIO_ML, GPIO.HIGH)
                
-             elif angle_left < 0 and angle_left > 90:
+                elif angle_left < 0 and angle_left > 90:
             
                   GPIO.output(GPIO_ML, GPIO.LOW)
 
-             if angle_left > 90 and angle_left < 180:
+                if angle_left > 90 and angle_left < 180:
             
                   GPIO.output(GPIO_ML, GPIO.HIGH)
 
-             elif angle_left > 90 and angle_left < 180:
+                elif angle_left > 90 and angle_left < 180:
             
                   GPIO.output(GPIO_ML, GPIO.LOW)
             
-             if angle_left > 180 and angle_left < 270:
+                if angle_left > 180 and angle_left < 270:
             
-               GPIO.output(GPIO_ML, GPIO.HIGH)
+                  GPIO.output(GPIO_ML, GPIO.HIGH)
 
-             elif angle_left < 180 and angle_left > 270:
+                elif angle_left < 180 and angle_left > 270:
             
-               GPIO.output(GPIO_ML, GPIO.LOW)
+                  GPIO.output(GPIO_ML, GPIO.LOW)
                          
-             if angle_left > 270 and angle_left < 360:
+                if angle_left > 270 and angle_left < 360:
             
-               GPIO.output(GPIO_ML, GPIO.HIGH)
+                  GPIO.output(GPIO_ML, GPIO.HIGH)
 
-             elif angle_left > 270 and angle_left < 360:
+                elif angle_left > 270 and angle_left < 360:
             
-               GPIO.output(GPIO_ML, GPIO.LOW)
+                  GPIO.output(GPIO_ML, GPIO.LOW)
 
 #######################################################################################################################################################
 
