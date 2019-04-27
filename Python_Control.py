@@ -16,7 +16,7 @@ from evdev import ecodes, list_devices, AbsInfo, InputDevice, categorize, events
 
 
 # DEFINITIONS:
-gamepad=InputDevice('/dev/input/event3')
+gamepad=InputDevice('/dev/input/event2')
 
 running = True
 
@@ -28,7 +28,7 @@ GPIO_FL = 11  #B1_F
  
 GPIO_MM = 31  #A1_M && B2_M
 GPIO_MR = 33  #A2_M
-GPIO_ML = 29  #B1_M
+GPIO_ML = 7  #B1_M
  
 GPIO_BM = 38  #A1_B && B2_B
 GPIO_BR = 40  #A2_B
@@ -36,17 +36,17 @@ GPIO_BL = 36  #B1_B
 
 #Set GPIO Pins to off
 
-GPIO.setup(GPIO_FM, GPIO.OUT, initial = 0) 
-GPIO.setup(GPIO_FR, GPIO.OUT, initial = 0)
-GPIO.setup(GPIO_FL, GPIO.OUT, initial = 0)
+GPIO.setup(GPIO_FM, GPIO.OUT) 
+GPIO.setup(GPIO_FR, GPIO.OUT)
+GPIO.setup(GPIO_FL, GPIO.OUT)
 
-GPIO.setup(GPIO_MM, GPIO.OUT, initial = 0)
-GPIO.setup(GPIO_MR, GPIO.OUT, initial = 0)
-GPIO.setup(GPIO_ML, GPIO.OUT, initial = 0)
+GPIO.setup(GPIO_MM, GPIO.OUT)
+GPIO.setup(GPIO_MR, GPIO.OUT)
+GPIO.setup(GPIO_ML, GPIO.OUT)
 
-GPIO.setup(GPIO_BM, GPIO.OUT, initial = 0)
-GPIO.setup(GPIO_BR, GPIO.OUT, initial = 0)
-GPIO.setup(GPIO_BL, GPIO.OUT, initial = 0)
+GPIO.setup(GPIO_BM, GPIO.OUT)
+GPIO.setup(GPIO_BR, GPIO.OUT)
+GPIO.setup(GPIO_BL, GPIO.OUT)
 
 #######################################################################################################################################################
 
@@ -104,6 +104,8 @@ if __name__ == '__main__':
              #print(event.value)
              #print(event.code)
              print('\n')
+             HIGH=GPIO.HIGH
+             LOW=GPIO.LOW
              # print(event.code)
              # print(events.AbsEvent.event)
              absevent=categorize(event)
@@ -116,20 +118,18 @@ if __name__ == '__main__':
 
 # X BUTTON (BREAKS CODE):
              if event.code==307 and event.value ==1:
-
+		GPIO.output(GPIO_BR, LOW)
+		GPIO.output(GPIO_ML, LOW)
+		GPIO.output(GPIO_MR, LOW)
+		GPIO.output(GPIO_MM, LOW)
+		GPIO.output(GPIO_BM, LOW)
+		GPIO.output(GPIO_BL, LOW)
+		GPIO.output(GPIO_FR, LOW)
+		GPIO.output(GPIO_FL, LOW)
+		GPIO.output(GPIO_FM, LOW)
                 running=False
-		
-		GPIO.output(GPIO_FM, GPIO.LOW) 
-		GPIO.output(GPIO_FR, GPIO.LOW)
-		GPIO.output(GPIO_FL, GPIO.LOW)
 
-		GPIO.output(GPIO_MM, GPIO.LOW)
-		GPIO.output(GPIO_MR, GPIO.LOW)
-		GPIO.output(GPIO_ML, GPIO.LOW)
 
-		GPIO.output(GPIO_BM, GPIO.LOW)
-		GPIO.output(GPIO_BR, GPIO.LOW)
-		GPIO.output(GPIO_BL, GPIO.LOW)
 		
                 break
 
@@ -159,69 +159,83 @@ if __name__ == '__main__':
 
              if mag_left >= 24000:
         
-                if angle_left == 0 or angle_left == 360:
+                if angle_left >= 350 or angle_left <= 10: # RIGHT
             
-                   GPIO.output(GPIO_ML, GPIO.HIGH)
+                  GPIO.output(GPIO_MR, HIGH)
+                  GPIO.output(GPIO_BR, LOW)
+                  GPIO.output(GPIO_BL, LOW)
+                  GPIO.output(GPIO_ML, LOW)
+                  GPIO.output(GPIO_FR, LOW)
+                  GPIO.output(GPIO_FL, LOW)
 
-                elif angle_left != 0 or angle_left != 360:
+                elif angle_left >= 80 and angle_left <= 100: # FORWARD
 
-                  GPIO.output(GPIO_ML, GPIO.LOW)
+                  GPIO.output(GPIO_BR, HIGH)
+                  GPIO.output(GPIO_BL, HIGH)
+                  GPIO.output(GPIO_MR, LOW)
+                  GPIO.output(GPIO_ML, LOW)
+                  GPIO.output(GPIO_FR, LOW)
+                  GPIO.output(GPIO_FL, LOW)
+                        
+                elif angle_left >= 170 and angle_left <= 190: #LEFT
             
-                if angle_left == 90:
-            
-                  GPIO.output(GPIO_ML, GPIO.HIGH)
+                  GPIO.output(GPIO_ML, HIGH)
+                  GPIO.output(GPIO_MR, LOW)
+                  GPIO.output(GPIO_BR, LOW)
+                  GPIO.output(GPIO_BL, LOW)
+                  GPIO.output(GPIO_FR, LOW)
+                  GPIO.output(GPIO_FL, LOW)
 
-                elif angle_left != 90:
+                elif angle_left >= 260 and angle_left <= 280: # BACK
+            
+                  GPIO.output(GPIO_FR, HIGH)
+                  GPIO.output(GPIO_FL, HIGH)
+                  GPIO.output(GPIO_MR, LOW)
+                  GPIO.output(GPIO_ML, LOW)
+                  GPIO.output(GPIO_BR, LOW)
+                  GPIO.output(GPIO_BL, LOW)
 
-                  GPIO.output(GPIO_ML, GPIO.LOW)               
+                elif angle_left > 10 and angle_left < 80: # FORWARD RIGHT
             
-                if angle_left == 180:
-            
-                  GPIO.output(GPIO_ML, GPIO.HIGH)
-
-                elif angle_left != 180:
-
-                   GPIO.output(GPIO_ML, GPIO.LOW)
-            
-                if angle_left == 270:
-            
-                     GPIO.output(GPIO_ML, GPIO.HIGH)
-
-                elif angle_left != 270:
-
-                   GPIO.output(GPIO_ML, GPIO.LOW)
-            
-                if angle_left > 0 and angle_left < 90:
-            
-                  GPIO.output(GPIO_ML, GPIO.HIGH)
+                  GPIO.output(GPIO_BR, HIGH)
+                  GPIO.output(GPIO_BL, HIGH)
+                  GPIO.output(GPIO_MR, HIGH)
+                  GPIO.output(GPIO_ML, LOW)
+                  GPIO.output(GPIO_FR, LOW)
+                  GPIO.output(GPIO_FL, LOW)
                
-                elif angle_left < 0 and angle_left > 90:
+                elif angle_left > 100 and angle_left < 170: # FORWARD LEFT
             
-                  GPIO.output(GPIO_ML, GPIO.LOW)
+                  GPIO.output(GPIO_BR, HIGH)
+                  GPIO.output(GPIO_BL, HIGH)
+                  GPIO.output(GPIO_MR, LOW)
+                  GPIO.output(GPIO_ML, HIGH)
+                  GPIO.output(GPIO_FR, LOW)
+                  GPIO.output(GPIO_FL, LOW)
 
-                if angle_left > 90 and angle_left < 180:
+                elif angle_left > 190 and angle_left < 260: # BACKWARD LEFT
             
-                  GPIO.output(GPIO_ML, GPIO.HIGH)
+                  GPIO.output(GPIO_BR, LOW)
+                  GPIO.output(GPIO_BL, LOW)
+                  GPIO.output(GPIO_MR, LOW)
+                  GPIO.output(GPIO_ML, HIGH)
+                  GPIO.output(GPIO_FR, HIGH)
+                  GPIO.output(GPIO_FL, HIGH)
 
-                elif angle_left > 90 and angle_left < 180:
+                elif angle_left > 260 and angle_left < 350: # BACKWARD RIGHT
             
-                  GPIO.output(GPIO_ML, GPIO.LOW)
-            
-                if angle_left > 180 and angle_left < 270:
-            
-                  GPIO.output(GPIO_ML, GPIO.HIGH)
-
-                elif angle_left < 180 and angle_left > 270:
-            
-                  GPIO.output(GPIO_ML, GPIO.LOW)
-                         
-                if angle_left > 270 and angle_left < 360:
-            
-                  GPIO.output(GPIO_ML, GPIO.HIGH)
-
-                elif angle_left > 270 and angle_left < 360:
-            
-                  GPIO.output(GPIO_ML, GPIO.LOW)
+                  GPIO.output(GPIO_BR, LOW)
+                  GPIO.output(GPIO_BL, LOW)
+                  GPIO.output(GPIO_MR, HIGH)
+                  GPIO.output(GPIO_ML, LOW)
+                  GPIO.output(GPIO_FR, HIGH)
+                  GPIO.output(GPIO_FL, HIGH)
+                  print(True)
+             elif mag_left <24000:
+                GPIO.output(GPIO_MR, LOW)
+                GPIO.output(GPIO_BR, LOW)
+                GPIO.output(GPIO_BL, LOW)
+               
 
 #######################################################################################################################################################
 
