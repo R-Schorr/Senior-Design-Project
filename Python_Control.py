@@ -30,9 +30,9 @@ GPIO_MM = 31  #A1_M && B2_M
 GPIO_MR = 33  #A2_M
 GPIO_ML = 7  #B1_M
  
-GPIO_BM = 38  #A1_B && B2_B
+GPIO_BM = 37  #A1_B && B2_B
 GPIO_BR = 40  #A2_B
-GPIO_BL = 36  #B1_B
+GPIO_BL = 35  #B1_B
 
 #Set GPIO Pins to off
 
