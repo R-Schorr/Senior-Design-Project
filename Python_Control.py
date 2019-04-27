@@ -231,11 +231,13 @@ if __name__ == '__main__':
                   GPIO.output(GPIO_FR, HIGH)
                   GPIO.output(GPIO_FL, HIGH)
                   print(True)
-             elif mag_left <24000:
+             elif mag_left <24000: #NEUTRAL
                 GPIO.output(GPIO_MR, LOW)
                 GPIO.output(GPIO_BR, LOW)
                 GPIO.output(GPIO_BL, LOW)
-               
+                GPIO.output(GPIO_ML, LOW)
+                GPIO.output(GPIO_FR, LOW)
+                GPIO.output(GPIO_FL, LOW)
 
 #######################################################################################################################################################
 
@@ -260,19 +262,78 @@ if __name__ == '__main__':
 # Joystick backward = only fire negative x translational thrusters (A1_M, B2_M)
 
 
+	     if mag_right >= 24000:
+        
+                if angle_right >= 350 or angle_right <= 10: # RIGHT
+            
+
+                elif angle_right >= 80 and angle_right <= 100: # FORWARD
+
+                  GPIO.output(GPIO_BM, HIGH)
+                  GPIO.output(GPIO_MM, HIGH)
+                  GPIO.output(GPIO_FM, HIGH)
+                        
+                elif angle_right >= 170 and angle_right <= 190: #LEFT
+          
+
+                elif angle_right >= 260 and angle_right <= 280: # BACK
+            
+                  GPIO.output(GPIO_BM, LOW)
+                  GPIO.output(GPIO_MM, HIGH)
+                  GPIO.output(GPIO_FM, LOW)
+
+                elif angle_right > 10 and angle_right < 80: # FORWARD RIGHT
+            
+                  GPIO.output(GPIO_BM, HIGH)
+                  GPIO.output(GPIO_MM, HIGH)
+                  GPIO.output(GPIO_FM, HIGH)
+               
+                elif angle_right > 100 and angle_right < 170: # FORWARD LEFT
+            
+                  GPIO.output(GPIO_BM, HIGH)
+                  GPIO.output(GPIO_MM, HIGH)
+                  GPIO.output(GPIO_FM, HIGH)
+
+                elif angle_right > 190 and angle_right < 260: # BACKWARD LEFT
+            
+                  GPIO.output(GPIO_BM, LOW)
+                  GPIO.output(GPIO_MM, HIGH)
+                  GPIO.output(GPIO_FM, LOW)
+
+                elif angle_right > 260 and angle_right < 350: # BACKWARD RIGHT
+            
+                  GPIO.output(GPIO_BM, LOW)
+                  GPIO.output(GPIO_MM, HIGH)
+                  GPIO.output(GPIO_FM, LOW)
+                  print(True)
+             elif mag_right <24000: # NEUTRAL
+                GPIO.output(GPIO_BM, HIGH)
+                GPIO.output(GPIO_MM, HIGH)
+                GPIO.output(GPIO_FM, LOW)
+
+
 #######################################################################################################################################################
 
 
 # ROLLING (BUMPERS):
 	     if event.code==310 and event.value ==1:
-		    left_bump = 1;
+		    GPIO.output(GPIO_BR, HIGH)
+		    GPIO.output(GPIO_FL, HIGH)
+		    sleep(1)
+		    GPIO.output(GPIO_BR, LOW)
+		    GPIO.output(GPIO_FL, LOW)
 
 	     if event.code==311 and event.value ==1:
-		    right_bump = 1;
+		    GPIO.output(GPIO_FR, HIGH)
+		    GPIO.output(GPIO_BL, HIGH)
+		    sleep(1)
+		    GPIO.output(GPIO_FR, LOW)
+		    GPIO.output(GPIO_BL, LOW)
 
 
 # Left bumper = for 1 second, (looking at back surface) fire left attitude trhuster into positive z axis and right attitude thruster into negative z axis (A2_B, B1_F)
 # Right bumper = for 1 second, (looking at back surface) fire right attitude trhuster into positive z axis and left attitude thruster into negative z axis (A2_F, B1_B)
+
 
 
 #######################################################################################################################################################
