@@ -133,6 +133,70 @@ if __name__ == '__main__':
 # Joystick right = yaw right (positive z moment) = fire attitude thruster into positive y axis
 # Joystick left = yaw left (negative z moment) = fire attitude thruster ionto negative y axis
 
+        
+             if angle_left == 0 or angle_left == 360:
+            
+                GPIO.output(GPIO_ML, GPIO.HIGH)
+
+             elif angle_left != 0 or angle_left != 360:
+
+               GPIO.output(GPIO_ML, GPIO.LOW)
+            
+             if angle_left == 90:
+            
+               GPIO.output(GPIO_ML, GPIO.HIGH)
+
+             elif angle_left != 90:
+
+               GPIO.output(GPIO_ML, GPIO.LOW)               
+            
+             if angle_left == 180:
+            
+               GPIO.output(GPIO_ML, GPIO.HIGH)
+
+	     elif angle_left != 180:
+
+                GPIO.output(GPIO_ML, GPIO.LOW)
+            
+             if angle_left == 270:
+            
+                  GPIO.output(GPIO_ML, GPIO.HIGH)
+
+      	     elif angle_left != 270:
+
+                   GPIO.output(GPIO_ML, GPIO.LOW)
+            
+             if angle_left > 0 and angle_left < 90:
+            
+                  GPIO.output(GPIO_ML, GPIO.HIGH)
+               
+             elif angle_left < 0 and angle_left > 90:
+            
+                  GPIO.output(GPIO_ML, GPIO.LOW)
+
+             if angle_left > 90 and angle_left < 180:
+            
+                  GPIO.output(GPIO_ML, GPIO.HIGH)
+
+             elif angle_left > 90 and angle_left < 180:
+            
+                  GPIO.output(GPIO_ML, GPIO.LOW)
+            
+             if angle_left > 180 and angle_left < 270:
+            
+               GPIO.output(GPIO_ML, GPIO.HIGH)
+
+             elif angle_left < 180 and angle_left > 270:
+            
+               GPIO.output(GPIO_ML, GPIO.LOW)
+                         
+             if angle_left > 270 and angle_left < 360:
+            
+               GPIO.output(GPIO_ML, GPIO.HIGH)
+
+             elif angle_left > 270 and angle_left < 360:
+            
+               GPIO.output(GPIO_ML, GPIO.LOW)
 
 #######################################################################################################################################################
 
@@ -177,70 +241,3 @@ if __name__ == '__main__':
 
              #print(x)
              #print(y)
-        
-        #while angle == 0 or angle == 360:
-            
-    #GPIO.output(GPIO_ML, GPIO.HIGH)
-            
-    #while angle == 90:
-            
-            #GPIO.output(GPIO_ML, GPIO.HIGH)
-            
-        #while angle == 180:
-            
-            #GPIO.output(GPIO_ML, GPIO.HIGH)
-            
-        #while angle == 270:
-            
-            #GPIO.output(GPIO_ML, GPIO.HIGH)
-            
-        #while angle > 0 and angle < 90:
-            
-            #GPIO.output(GPIO_ML, GPIO.HIGH)
-            
-        #while angle > 90 and angle < 180:
-            
-            #GPIO.output(GPIO_ML, GPIO.HIGH)
-            
-        #while angle > 180 and angle < 270:
-            
-            #GPIO.output(GPIO_ML, GPIO.HIGH)
-            
-        #while angle > 270 and angle < 360:
-            
-            #GPIO.output(GPIO_ML, GPIO.HIGH)
-        
-    #x ,y = joy.rightStick()
-        #angle = angleFromCoorinates(x,y)
-        
-        #while angle == 0 or angle == 360:
-            
-            #GPIO.output(GPIO_ML, GPIO.HIGH)
-            
-        #while angle == 90:
-            
-            #GPIO.output(GPIO_ML, GPIO.HIGH)
-            
-        #while angle == 180:
-            
-            #GPIO.output(GPIO_ML, GPIO.HIGH)
-            
-        #while angle == 270:
-            
-            #GPIO.output(GPIO_ML, GPIO.HIGH)
-            
-        #while angle > 0 and angle < 90:
-            
-            #GPIO.output(GPIO_ML, GPIO.HIGH)
-            
-        #while angle > 90 and angle < 180:
-            
-            #GPIO.output(GPIO_ML, GPIO.HIGH)
-            
-        #while angle > 180 and angle < 270:
-            
-            #GPIO.output(GPIO_ML, GPIO.HIGH)
-            
-        #while angle > 270 and angle < 360:
-            
-            #GPIO.output(GPIO_ML, GPIO.HIGH)
