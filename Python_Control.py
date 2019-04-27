@@ -128,10 +128,10 @@ if __name__ == '__main__':
 	     print(mag_left)
 
 # Joystick neutral = do nothing
-# Joystick forward = pitch forward (negative y moment) = fire both attitude thrusters into negative z axis
-# Joystick backward = picth backward (positive y moment) = fire both attitude thrusters into positive z axis
-# Joystick right = yaw right (positive z moment) = fire attitude thruster into positive y axis
-# Joystick left = yaw left (negative z moment) = fire attitude thruster ionto negative y axis
+# Joystick forward = pitch forward (negative y moment) = fire both attitude thrusters into negative z axis (B1_B, A2_B)
+# Joystick backward = picth backward (positive y moment) = fire both attitude thrusters into positive z axis (B1_F, A2_F)
+# Joystick right = yaw right (positive z moment) = fire attitude thruster into positive y axis (A2_M)
+# Joystick left = yaw left (negative z moment) = fire attitude thruster into negative y axis (B1_M)
 
         
              if angle_left == 0 or angle_left == 360:
@@ -216,9 +216,9 @@ if __name__ == '__main__':
 	     print(mag_right)
 
 # Joystick right/left = do nothing different
-# Joystick neutral = fire two translational thrusters into negative z axis and fire negative x translational thrusters
-# Joystick forward = fire all four translational thrusters into negative z axis and fire negative x translational thrusters
-# Joystick backward = only fire negative x translational thrusters
+# Joystick neutral = fire two translational thrusters into negative z axis and fire negative x translational thrusters (A1_B, B2_B, A1_M, B2_M)
+# Joystick forward = fire all four translational thrusters into negative z axis and fire negative x translational thrusters (A1_B, B2_B, A1_F, B2_F A1_M, B2_M)
+# Joystick backward = only fire negative x translational thrusters (A1_M, B2_M)
 
 
 #######################################################################################################################################################
@@ -232,8 +232,8 @@ if __name__ == '__main__':
 		    right_bump = 1;
 
 
-# Left bumper = for 1 second, (looking at back surface) fire left attitude trhuster into positive z axis and right attitude thruster into negative z axis
-# Right bumper = for 1 second, (looking at back surface) fire right attitude trhuster into positive z axis and left attitude thruster into negative z axis
+# Left bumper = for 1 second, (looking at back surface) fire left attitude trhuster into positive z axis and right attitude thruster into negative z axis (A2_B, B1_F)
+# Right bumper = for 1 second, (looking at back surface) fire right attitude trhuster into positive z axis and left attitude thruster into negative z axis (A2_F, B1_B)
 
 
 #######################################################################################################################################################
