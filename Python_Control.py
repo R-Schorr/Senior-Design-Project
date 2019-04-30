@@ -25,7 +25,7 @@ GPIO.setmode(GPIO.BOARD)
 GPIO_FM = 13  #A1_F && B2_F
 GPIO_FR = 15  #A2_F
 GPIO_FL = 11  #B1_F
- 
+a =0
 GPIO_MM = 31  #A1_M && B2_M
 GPIO_MR = 33  #A2_M
 GPIO_ML = 7  #B1_M
@@ -113,6 +113,22 @@ if __name__ == '__main__':
              i=i+1
 
 
+#######################################################################################################################################################
+
+
+# A BUTTON (BREAKS VERTICAL):
+             if event.code==304 and event.value ==1:
+		if a ==0:
+			a = 1
+		if a ==1:
+			a = 0
+
+
+#######################################################################################################################################################
+
+	
+	
+	
 #######################################################################################################################################################
 
 
@@ -270,7 +286,10 @@ if __name__ == '__main__':
                 if angle_right >= 80 and angle_right <= 100: # FORWARD
 
                   GPIO.output(GPIO_BM, HIGH)
-                  GPIO.output(GPIO_MM, HIGH)
+		  if a == 0:
+                      GPIO.output(GPIO_MM, HIGH)
+		  if a == 1:
+                      GPIO.output(GPIO_MM, LOW)
                   GPIO.output(GPIO_FM, HIGH)
                         
                 #elif angle_right >= 170 and angle_right <= 190: #LEFT
@@ -279,36 +298,54 @@ if __name__ == '__main__':
                 elif angle_right >= 260 and angle_right <= 280: # BACK
             
                   GPIO.output(GPIO_BM, LOW)
-                  GPIO.output(GPIO_MM, HIGH)
+                  if a == 0:
+                      GPIO.output(GPIO_MM, HIGH)
+		  if a == 1:
+                      GPIO.output(GPIO_MM, LOW)
                   GPIO.output(GPIO_FM, LOW)
 
                 elif angle_right > 10 and angle_right < 80: # FORWARD RIGHT
             
                   GPIO.output(GPIO_BM, HIGH)
-                  GPIO.output(GPIO_MM, HIGH)
+                  if a == 0:
+                      GPIO.output(GPIO_MM, HIGH)
+		  if a == 1:
+                      GPIO.output(GPIO_MM, LOW)
                   GPIO.output(GPIO_FM, HIGH)
                
                 elif angle_right > 100 and angle_right < 170: # FORWARD LEFT
             
                   GPIO.output(GPIO_BM, HIGH)
-                  GPIO.output(GPIO_MM, HIGH)
+                  if a == 0:
+                      GPIO.output(GPIO_MM, HIGH)
+		  if a == 1:
+                      GPIO.output(GPIO_MM, LOW)
                   GPIO.output(GPIO_FM, HIGH)
 
                 elif angle_right > 190 and angle_right < 260: # BACKWARD LEFT
             
                   GPIO.output(GPIO_BM, LOW)
-                  GPIO.output(GPIO_MM, HIGH)
+                  if a == 0:
+                      GPIO.output(GPIO_MM, HIGH)
+		  if a == 1:
+                      GPIO.output(GPIO_MM, LOW)
                   GPIO.output(GPIO_FM, LOW)
 
                 elif angle_right > 260 and angle_right < 350: # BACKWARD RIGHT
             
                   GPIO.output(GPIO_BM, LOW)
-                  GPIO.output(GPIO_MM, HIGH)
+                  if a == 0:
+                      GPIO.output(GPIO_MM, HIGH)
+		  if a == 1:
+                      GPIO.output(GPIO_MM, LOW)
                   GPIO.output(GPIO_FM, LOW)
                   print(True)
              elif mag_right <24000: # NEUTRAL
                 GPIO.output(GPIO_BM, HIGH)
-                GPIO.output(GPIO_MM, HIGH)
+                if a == 0:
+                      GPIO.output(GPIO_MM, HIGH)
+		  if a == 1:
+                      GPIO.output(GPIO_MM, LOW)
                 GPIO.output(GPIO_FM, LOW)
 
 
